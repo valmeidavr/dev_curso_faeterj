@@ -1,7 +1,7 @@
 <main>
-          @yield('menu_lateral')
+    @yield('menu_lateral')
       <section class="content">
           @yield('conteudo')
       </section>
-          
+
 </main>

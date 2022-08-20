@@ -1,117 +1,27 @@
 @extends('layouts.app')
 @include('layouts.partials.menu')
-@section('conteudo')
-  Minhas aulas
-@endsection('conteudo')
-
 @section('menu_lateral')
 <nav>
+        <h3 class="course_title">{{$curso[0]->nome}}</h3>
         @foreach($curso as $cursos_detalhe)
+            <!-- Módulo -->
             @foreach($cursos_detalhe->modulos_exibir as $modulos)
-                    <p>{{ $modulos->nome }}</p>
-                    <ul class="module_list">
-                        @foreach($modulos->aulas_exibir as $aulas)
-                                <li>{{ $aulas->nome }}</li>
-                        @endforeach
-                    </ul>
+                <div class="module">
+                <h4 class="module_title">{{ $modulos->nome }}</h4>
+                <ul class="module_list">
+                  <!-- Aulas-->
+                    @foreach($modulos->aulas_exibir as $aulas)
+                    <li><a href="#">{{ $aulas->nome }}</a></li>
+                    @endforeach
+                </ul>
+                </div>
             @endforeach
         @endforeach
-
-        <h3 class="course_title"></h3>
-
-        <div class="module">
-          <h4 class="module_title">Módulo 01</h4>
-
-          <ul class="module_list">
-            <li>
-              <a href="#">Introdução</a>
-            </li>
-            <li>
-              <a href="#">Instalação dos aplicativos</a>
-            </li>
-            <li>
-              <a href="#">CONFIGURAÇÃO DO VSCODE</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="module">
-          <h4 class="module_title">Modulo 02</h4>
-
-          <ul class="module_list">
-            <li>
-              <a href="#">Variáveis</a>
-            </li>
-            <li>
-              <a href="#">Laços de repetição</a>
-            </li>
-            <li>
-              <a href="#">Funções</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="module">
-          <h4 class="module_title">Módulo 01</h4>
-
-          <ul class="module_list">
-            <li>
-              <a href="#">Introdução</a>
-            </li>
-            <li>
-              <a href="#">Instalação dos aplicativos</a>
-            </li>
-            <li>
-              <a href="#">CONFIGURAÇÃO DO VSCODE</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="module">
-          <h4 class="module_title">Modulo 02</h4>
-
-          <ul class="module_list">
-            <li>
-              <a href="#">Variáveis</a>
-            </li>
-            <li>
-              <a href="#">Laços de repetição</a>
-            </li>
-            <li>
-              <a href="#">Funções</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="module">
-          <h4 class="module_title">Modulo 02</h4>
-
-          <ul class="module_list">
-            <li>
-              <a href="#">Variáveis</a>
-            </li>
-            <li>
-              <a href="#">Laços de repetição</a>
-            </li>
-            <li>
-              <a href="#">Funções</a>
-            </li>
-          </ul>
-        </div>
-        <div class="module">
-          <h4 class="module_title">Modulo 02</h4>
-
-          <ul class="module_list">
-            <li>
-              <a href="#">Variáveis</a>
-            </li>
-            <li>
-              <a href="#">Laços de repetição</a>
-            </li>
-            <li>
-              <a href="#">Funções</a>
-            </li>
-          </ul>
-        </div>
 </nav>
 @endsection
+
+@section('conteudo')
+    Teste de conteúdo
+@endsection
+
+
