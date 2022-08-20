@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAulasTable extends Migration
+class CreateModulosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreateAulasTable extends Migration
      */
     public function up()
     {
-        Schema::create('aulas', function (Blueprint $table) {
+        Schema::create('modulos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->string('video')->nullable();
-            $table->longText('descricao')->nullable();
-            $table->date('tempo')->nullable();
-
-            $table->unsignedBigInteger('modulos_id');
-            $table->foreign('modulos_id')->references('id')->on('modulos');
-
+            $table->unsignedBigInteger('cursos_id');
+                $table->foreign('cursos_id')->references('id')->on('cursos');
             $table->enum('status', ['ativo', 'inativo']);
             $table->timestamps();
         });
@@ -35,6 +30,6 @@ class CreateAulasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aulas');
+        Schema::dropIfExists('modulos');
     }
 }

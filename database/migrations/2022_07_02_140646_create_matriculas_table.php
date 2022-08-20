@@ -15,7 +15,6 @@ class CreateMatriculasTable extends Migration
     {
         Schema::create('matriculas', function (Blueprint $table) {
             $table->bigIncrements('id');
-
             $table->unsignedBigInteger('alunos_id');
                 $table->foreign('alunos_id')->references('id')->on('users');
             $table->unsignedBigInteger('cursos_id');

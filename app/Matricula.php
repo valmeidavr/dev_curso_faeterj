@@ -8,6 +8,6 @@ class Matricula extends Model
 {
     protected $fillable = [
         'alunos_id',
-        'cursos_id',
+        'cursos_id'
     ];
 }

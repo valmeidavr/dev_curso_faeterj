@@ -1,5 +1,5 @@
 <footer>
-    <span>Copyright © 2023 - DevCurso</span>
+      <span>Copyright © 2022 - DevCurso</span>
 </footer>
-    </body>
+</body>
 </html>

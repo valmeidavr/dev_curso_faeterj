@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('cpf', 11)->unique();
+            $table->string('cpf',11)->unique();
             $table->string('rg')->nullable();
             $table->string('orgao')->nullable();
             $table->date('data_expedicao')->nullable();
@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->integer('numero')->nullable();
             $table->string('bairro');
             $table->string('cidade');
-            $table->string('uf', 2);
+            $table->string('uf',2);
             $table->enum('grupo', ['admin', 'professor-admin', 'professor', 'aluno']);
             $table->enum('status', ['ativo', 'inativo']);
             $table->rememberToken();

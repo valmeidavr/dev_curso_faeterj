@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Aula extends Model
 {
     protected $fillable = [
-        'nome',
+        'name',
         'video',
         'descricao',
         'tempo',

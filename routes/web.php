@@ -11,19 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/cursos', function () {
-    return view('cursos');
-});
-
 Route::get('/aulas', function () {
     return view('aulas');
 });
-
 Route::get('/contato', function () {
     return view('contato');
 });
 
+Route::get('/', 'CursoController@index');
+
+Route::get('/cursos', 'CursoController@index');
+
+Route::get('/curso/{id}', 'CursoController@show_cursos');

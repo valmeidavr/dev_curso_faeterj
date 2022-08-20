@@ -9,6 +9,6 @@ class Anexo extends Model
     protected $fillable = [
         'nome',
         'link',
-        'aulas_id',
+        'aulas_id'
     ];
 }

@@ -22,10 +22,10 @@ class CreateCursosTable extends Migration
             $table->string('video')->nullable();
             $table->float('valor', 8, 2);
             $table->date('tempo_expiracao')->nullable();
-            //CHAVE EXTRANGEIRA
+            //chave estrangeira
             $table->unsignedBigInteger('professor_id');
                 $table->foreign('professor_id')->references('id')->on('users');
-
+            
             $table->enum('status', ['ativo', 'inativo']);
             $table->timestamps();
         });
