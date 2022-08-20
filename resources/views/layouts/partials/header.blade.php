@@ -16,7 +16,7 @@
   </head>
   <body>
     <header>
-      <img src="{{ URL::asset('img/logo.png') }}" />
+      <a href='/'><img src="{{ URL::asset('img/logo.png') }}" /></a>
       <ul class="menu">
         @yield('menu_principal')
       </ul>
