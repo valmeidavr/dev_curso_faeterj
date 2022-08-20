@@ -7,7 +7,7 @@
         @foreach($cursos as $curso)
 
             <div class="card">
-                <img class="card_image" src="{{ URL::asset('img/' . $curso->imagem) }}" alt="">
+                <a href="/curso/{{ $curso->id }}"><img class="card_image" src="{{ URL::asset('img/' . $curso->imagem) }}" alt=""></a>
                     <div class="card_content">
                         <h1 class="title_card"> {{ $curso->nome }} </h1>
                             <a>{{ $curso->descricao }}
