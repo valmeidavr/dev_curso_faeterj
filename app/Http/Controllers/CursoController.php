@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Curso;
+use App\User;
 use Illuminate\Http\Request;
 use DB;
 
@@ -19,10 +20,19 @@ class CursoController extends Controller
          return view('curso', compact('curso'));
     }
     public function cadastro(){
-        return view('cad_cursos');
+        $professores = $this->_professores();
+        return view('cad_cursos', compact('professores'));
     }
 
     public function salvar_curso(Request $request) {
          Curso::create($request->all());
+         $professores = $this->_professores();
+         return view('cad_cursos', compact('professores'));
+    }
+
+    private function _professores() {
+        return User::where('grupo','=', 'professor-admin')
+        ->orwhere('grupo','=', 'professor')
+        ->get();
     }
 }
