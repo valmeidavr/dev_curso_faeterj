@@ -23,9 +23,6 @@ class CursoController extends Controller
     }
 
     public function salvar_curso(Request $request) {
-        $curso = [
-
-        ];
-        dd($request->all());
+         Curso::create($request->all());
     }
 }
