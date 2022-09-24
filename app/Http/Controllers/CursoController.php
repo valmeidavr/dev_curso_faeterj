@@ -13,9 +13,19 @@ class CursoController extends Controller
         return view('cursos', compact('cursos'));
     }
     public function show_cursos($id) {
+        //$curso = DB::select("select * from cursos where id = ?",[$id]);
         $curso = Curso::where('id', '=', $id)->get();
 
-  /*       $curso = DB::select("select * from cursos where id =?", [$id]); */
-        return view('curso', compact('curso'));
+         return view('curso', compact('curso'));
+    }
+    public function cadastro(){
+        return view('cad_cursos');
+    }
+
+    public function salvar_curso(Request $request) {
+        $curso = [
+
+        ];
+        dd($request->all());
     }
 }

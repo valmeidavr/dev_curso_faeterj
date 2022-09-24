@@ -3,7 +3,9 @@
 @section('menu_lateral')
 <nav>
         <h3 class="course_title">{{$curso[0]->nome}}</h3>
+
         @foreach($curso as $cursos_detalhe)
+
             <!-- Módulo -->
             @foreach($cursos_detalhe->modulos_exibir as $modulos)
                 <div class="module">
