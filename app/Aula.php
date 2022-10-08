@@ -14,4 +14,8 @@ class Aula extends Model
         'modulos_id',
         'status'
     ];
+
+    public function anexos_exibir() {
+        return $this->hasMany(Anexo::class, 'aulas_id', 'id');
+    }
 }

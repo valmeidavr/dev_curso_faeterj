@@ -43,20 +43,19 @@
 
 @section('conteudo')
  <div class="content">
-    <h2>Aula 1</h2>
+    <h2>{{ $aula[0]->nome }}</h2>
     <div id="video_youtube">
         <iframe width="800" height="500"
-            src="https://www.youtube.com/embed/tgbNymZ7vqY">
+            src="https://www.youtube.com/embed/{{ $aula[0]->video }}">
         </iframe>   
     </div>
 
     <div class="links">
         <h3>Links de Apoio</h3>
         <ul>
-            <li>teste1</li>
-            <li>teste2</li>
-            <li>teste3</li>
-            <li>teste4</li>
+            @foreach($aula[0]->anexos_exibir as $anexos)
+               <li><a href="{{$anexos->link}}">{{ $anexos->nome }}</a></li>
+            @endforeach
         </ul>
     </div>
 

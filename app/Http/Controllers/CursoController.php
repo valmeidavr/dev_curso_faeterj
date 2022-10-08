@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Curso;
+use App\Aula;
 use App\User;
 use Illuminate\Http\Request;
 use DB;
@@ -14,13 +15,16 @@ class CursoController extends Controller
         return view('cursos', compact('cursos'));
     }
     public function show_cursos($id) {
-        //$curso = DB::select("select * from cursos where id = ?",[$id]);
+       
         $curso = Curso::where('id', '=', $id)->get();
-
-         return view('curso', compact('curso'));
+        $aula = Aula::where('modulos_id', '=', '1')
+                ->orderBy('id', 'ASC')
+                ->limit(1)
+                ->get();   
+        return view('curso', compact('curso', 'aula'));
     }
     public function cadastro(){
-        $professores = $this->_professores();
+        $professores = $this->professores();
         return view('cad_cursos', compact('professores'));
     }
 
