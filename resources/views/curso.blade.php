@@ -71,11 +71,16 @@
             </div>
         </div>
 
-        <div class="comentar">
-            <textarea>
-                saasasasasasasas
-            </textarea>
-        </div>
+        <form method="POST" action="{{route('comentar')}}">
+            @csrf
+            <div class="comentar">
+                <textarea name="comentario">
+                    saasasasasasasas
+                </textarea>
+                <input type="hidden" name="aula_id" value="{{ $aula->id }}"/>
+            </div>
+            <button type="submit">Comentar</button>
+        </form>
     </div>
 @else
     Nenhuma aula cadastrada!   

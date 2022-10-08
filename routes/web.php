@@ -27,3 +27,5 @@ Route::get('/curso/{id}', 'CursoController@show_cursos');
 //Cadastros
 Route::get('/cadastro/cursos', 'CursoController@cadastro');
 Route::post('/cadastro/cursos/salvar', 'CursoController@salvar_curso')->name('salvar_curso');
+
+Route::post('/comentar', 'AulaController@comentar')->name('comentar');
