@@ -18,9 +18,13 @@ class CursoController extends Controller
        
         $curso = Curso::where('id', '=', $id)->get();
         $aula = Aula::where('modulos_id', '=', '1')
+                ->where('cursos.id', '=', $id)
+                ->join('modulos', 'modulos.id', '=', 'aulas.modulos_id')
+                ->join('cursos', 'cursos.id', '=', 'modulos.cursos_id')
+                ->select('aulas.*')
                 ->orderBy('id', 'ASC')
                 ->limit(1)
-                ->get();   
+                ->first(); 
         return view('curso', compact('curso', 'aula'));
     }
     public function cadastro(){

@@ -42,39 +42,44 @@
 @endsection
 
 @section('conteudo')
- <div class="content">
-    <h2>{{ $aula[0]->nome }}</h2>
-    <div id="video_youtube">
-        <iframe width="800" height="500"
-            src="https://www.youtube.com/embed/{{ $aula[0]->video }}">
-        </iframe>   
-    </div>
 
-    <div class="links">
-        <h3>Links de Apoio</h3>
-        <ul>
-            @foreach($aula[0]->anexos_exibir as $anexos)
-               <li><a href="{{$anexos->link}}">{{ $anexos->nome }}</a></li>
-            @endforeach
-        </ul>
-    </div>
-
-    <div class="comentarios">
-        <div class="comentarios_top">
-            <span>E-mail: teste@teste.com.br</span>
-            <span>Data: 01/10/2022</span>
+@if(!empty($aula))
+    <div class="content">
+        <h2>{{ $aula->nome }}</h2>
+        <div id="video_youtube">
+            <iframe width="800" height="500"
+                src="https://www.youtube.com/embed/{{ $aula->video }}">
+            </iframe>   
         </div>
-        <div class="comentarios_content">
-            <p>sasokopakopskopakpskopkaopsopas</p>
+
+        <div class="links">
+            <h3>Links de Apoio</h3>
+            <ul>
+                @foreach($aula->anexos_exibir as $anexos)
+                <li><a href="{{$anexos->link}}">{{ $anexos->nome }}</a></li>
+                @endforeach
+            </ul>
+        </div>
+
+        <div class="comentarios">
+            <div class="comentarios_top">
+                <span>E-mail: teste@teste.com.br</span>
+                <span>Data: 01/10/2022</span>
+            </div>
+            <div class="comentarios_content">
+                <p>sasokopakopskopakpskopkaopsopas</p>
+            </div>
+        </div>
+
+        <div class="comentar">
+            <textarea>
+                saasasasasasasas
+            </textarea>
         </div>
     </div>
-
-    <div class="comentar">
-        <textarea>
-            saasasasasasasas
-        </textarea>
-    </div>
-</div>
+@else
+    Nenhuma aula cadastrada!   
+@endif
 @endsection
 
 
