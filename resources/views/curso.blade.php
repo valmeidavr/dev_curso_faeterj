@@ -1,6 +1,17 @@
 @extends('layouts.app')
 @include('layouts.partials.menu')
 @section('menu_lateral')
+<style>
+    .content {
+        padding-top: 20px;
+        padding-left: 35px;
+        background-color: red;
+    }
+    .comentar {
+        width: 400px;
+        height: 600px;
+    }
+</style>
 <nav>
         <h3 class="course_title">{{$curso[0]->nome}}</h3>
 
@@ -23,7 +34,40 @@
 @endsection
 
 @section('conteudo')
-    Teste de conteúdo
+ <div class="content">
+    <h2>Aula 1</h2>
+    <div id="video_youtube">
+        <iframe width="800" height="500"
+            src="https://www.youtube.com/embed/tgbNymZ7vqY">
+        </iframe>   
+    </div>
+
+    <div id="links">
+        <h3>Links de Apoio</h3>
+        <ul>
+            <li>teste1</li>
+            <li>teste2</li>
+            <li>teste3</li>
+            <li>teste4</li>
+        </ul>
+    </div>
+
+    <div class="comentarios">
+        <div class="comentarios_top">
+            <span>E-mail: teste@teste.com.br</span>
+            <span>Data: 01/10/2022</span>
+        </div>
+        <div class="comentarios_content">
+            <p>sasokopakopskopakpskopkaopsopas</p>
+        </div>
+    </div>
+
+    <div class="comentar">
+        <textarea>
+            saasasasasasasas
+        </textarea>
+    </div>
+</div>
 @endsection
 
 
