@@ -8,7 +8,11 @@
         padding-right: 35px;
         width: 100%;
     }
+    .links {
+        margin-top: 20px;
+    }
     .comentarios {
+        margin-top: 20px;
         background-color: red;
         width: 100%;
     }
@@ -46,7 +50,7 @@
         </iframe>   
     </div>
 
-    <div id="links">
+    <div class="links">
         <h3>Links de Apoio</h3>
         <ul>
             <li>teste1</li>
