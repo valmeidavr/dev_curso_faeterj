@@ -5,11 +5,15 @@
     .content {
         padding-top: 20px;
         padding-left: 35px;
-        background-color: red;
+        padding-right: 35px;
+        width: 100%;
     }
-    .comentar {
-        width: 400px;
-        height: 600px;
+    .comentarios {
+        background-color: red;
+        width: 100%;
+    }
+    .comentarios_content {
+        margin: 10px 0 20px 0;
     }
 </style>
 <nav>
