@@ -20,6 +20,8 @@ Route::get('/contato', function () {
 
 Route::get('/', 'CursoController@index');
 
+Route::post('/pesquisar-curso', 'CursoController@pesquisar_curso')->name('pesquisar-curso');
+
 Route::get('/cursos', 'CursoController@index');
 
 Route::get('/curso/{id}', 'CursoController@show_cursos');

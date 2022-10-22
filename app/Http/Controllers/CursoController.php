@@ -11,11 +11,18 @@ use DB;
 class CursoController extends Controller
 {
     public function index() {
-        $cursos = DB::select("select * from cursos");
+        $cursos = Curso::paginate(4);
+        return view('cursos', compact('cursos'));
+
+    }
+
+    public function pesquisar_curso(Request $request) {
+        $nome = trim($request->nome);
+        $cursos = Curso::where('nome', 'like', "%${nome}%")->paginate(4);
         return view('cursos', compact('cursos'));
     }
-    public function show_cursos($id) {
-       
+
+    public function show_cursos($id) { 
         $curso = Curso::where('id', '=', $id)->get();
         $aula = Aula::where('modulos_id', '=', '1')
                 ->where('cursos.id', '=', $id)

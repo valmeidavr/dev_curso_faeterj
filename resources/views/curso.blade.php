@@ -7,7 +7,7 @@
         <div class="col-lg-3 col-12" style="background-color: rgb(218, 218, 218); padding: 30px;">
             <nav>
                 <h4 class="course_title">{{$curso[0]->nome}}</h4>
-        
+
                 @foreach($curso as $cursos_detalhe)
         
                     <!-- Módulo -->
@@ -27,7 +27,7 @@
             </nav>
         </div>
         
-        <div class="col-lg-9 col-12" style="background-color: rgb(232, 232, 255);">
+        <div class="col-lg-9 col-12" style="background-color: rgb(232, 232, 255); padding: 20px;">
                 @if(!empty($aula))
                 <div class="content">
                     <h2>{{ $aula->nome }}</h2>
@@ -46,17 +46,7 @@
                         </ul>
                         <br><br>
                     </div>
-        
-                   {{--  <div class="comentarios">
-                        <div class="comentarios_top">
-                            <span>E-mail: teste@teste.com.br</span>
-                            <span>Data: 01/10/2022</span>
-                        </div>
-                        <div class="comentarios_content">
-                            <p>sasokopakopskopakpskopkaopsopas</p>
-                        </div>
-                    </div> --}}
-
+  
                     <div class="card">
                         <h6 class="card-header">01/10/2022 - teste@teste.com.br</h6>
                         <div class="card-body">

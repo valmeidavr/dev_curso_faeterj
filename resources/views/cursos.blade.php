@@ -1,9 +1,25 @@
 @extends('layouts.app')
 @section('conteudo')
   <body>
-    <div class="pageheaderbg">
-        <div class="cards">
 
+        <div class="container mt-4">
+            <div class="row">
+              <div class="col-4"> 
+                <form action="{{ route('pesquisar-curso') }}" method="POST">
+                    @csrf
+                    <div class="pageheaderbg">
+                        <div class="input-group mb-3">
+                            <input type="text" name="nome" class="form-control" placeholder="Pesquisar o Curso" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Pesquisar</button>
+                        </div>
+                    </div>
+                </form>
+               </div>
+            </div>
+        </div>
+
+        <div class="cards mt-4">
         @foreach($cursos as $curso)
 
             <div class="card">
@@ -20,7 +36,7 @@
             </div>
 
         @endforeach
-
+        {!! $cursos->links() !!}
         </div>
     </div>
   </body>

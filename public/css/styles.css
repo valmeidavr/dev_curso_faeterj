@@ -167,6 +167,8 @@ footer {
   background: #fafafa;
   border-right: 2px solid white;
   border-left: 2px solid white;
+  height: 120px;
+  overflow: hidden;
 }
 .card_info {
   padding: 15px;
