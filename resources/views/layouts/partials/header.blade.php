@@ -12,6 +12,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <title>Sitema EAD - DEVCURSO</title>
   
   </head>
