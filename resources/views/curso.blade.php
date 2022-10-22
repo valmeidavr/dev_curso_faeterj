@@ -30,6 +30,7 @@
         <div class="col-lg-9 col-12" style="background-color: rgb(232, 232, 255); padding: 20px;">
                 @if(!empty($aula))
                 <div class="content">
+                    <input type="hidden" id="aula_id" value="{{$aula->id}}"/>
                     <h2>{{ $aula->nome }}</h2>
                     <div id="video_youtube">
                         <iframe width="800" height="500"
@@ -47,27 +48,21 @@
                         <br><br>
                     </div>
   
-                    <div class="card">
-                        <h6 class="card-header">01/10/2022 - teste@teste.com.br</h6>
-                        <div class="card-body">
-                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                      </div>
+                    <div id="montarCard">
+
+                    </div>
+                     
                     
 
-                    <form method="POST" action="{{route('comentar')}}" class="mt-4">
+                    <form id="frm-comentar" method="POST" action="{{route('comentar')}}" class="mt-4">
                         <div class="form-row">
                           <div class="col-12">
                             <h6 for="Comentario">Comentário</h6>
-                            <textarea class="form-control" name="comentario" rows="5"></textarea>
+                            <textarea class="form-control" name="comentario" id="comentario" rows="5"></textarea>
                           </div>
                         </div>
                         <button type="submit" class="mt-2 btn btn-primary mb-2">Comentar</button>
                       </form>
-
-
-
-
     
                 </div>
             @else
@@ -80,3 +75,35 @@
 @endsection
 
 
+@section('javascript')
+<script>
+    $('#frm-comentar').submit(function(e){
+        e.preventDefault();
+        let comentario = $('#comentario').val();
+        let aula_id = $('#aula_id').val();
+    
+        fetch(`/comentar`, {
+            method: 'POST',
+            body: JSON.stringify({
+                comentario,
+                aula_id
+            }),
+            headers: {"Content-type": "application/json; charset=UTF-8"},
+        })
+        .then(res => res.json())
+        .then(res => {
+            montarCard(res);
+        })
+    });
+
+
+function montarCard(res) {
+     $('#montarCard').html(`<div class='card'>
+        <h6 class='card-header'>${res.created_at} - teste@teste.com.br</h6>
+        <div class='card-body'>
+            <p class='card-text'>${res.descricao}</p></div>
+        </div>`); 
+}
+
+</script>
+@endsection
