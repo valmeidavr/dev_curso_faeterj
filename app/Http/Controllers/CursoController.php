@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Curso;
 use App\Aula;
+use App\Modulo;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class CursoController extends Controller
@@ -24,8 +26,9 @@ class CursoController extends Controller
 
     public function show_cursos($id) { 
         $curso = Curso::where('id', '=', $id)->get();
-        $aula = Aula::where('modulos_id', '=', '1')
-                ->where('cursos.id', '=', $id)
+        $modulo = Modulo::where('cursos_id', '=', $id)->first()->id;
+        $aula = Aula::where('cursos.id', '=', $id)
+                ->where('modulos_id', '=', $modulo)
                 ->join('modulos', 'modulos.id', '=', 'aulas.modulos_id')
                 ->join('cursos', 'cursos.id', '=', 'modulos.cursos_id')
                 ->select('aulas.*')
@@ -35,19 +38,51 @@ class CursoController extends Controller
         return view('curso', compact('curso', 'aula'));
     }
     public function cadastro(){
-        $professores = $this->professores();
+        $professores = $this->_professores();
         return view('cad_cursos', compact('professores'));
     }
-
+    private function _professores() {
+        return User::where('grupo','=', 'professor-admin')
+        ->orwhere('grupo','=', 'professor')
+        ->get();
+    }   
     public function salvar_curso(Request $request) {
          Curso::create($request->all());
          $professores = $this->_professores();
          return view('cad_cursos', compact('professores'));
     }
-
-    private function _professores() {
-        return User::where('grupo','=', 'professor-admin')
-        ->orwhere('grupo','=', 'professor')
-        ->get();
+    private function _cursos() {
+        return Curso::all();
     }
+    
+    private function _modulos($id) {
+        return Modulo::where('cursos_id', '=', $id)->get();
+    }
+
+    public function cadastro_modulos(){
+        $cursos = $this->_cursos();
+        return view('cad_modulos', compact('cursos'));
+    }
+    public function salvar_modulo(Request $request) {
+        Modulo::create($request->all());
+        return redirect('/cadastro/modulos')->with('success', 'Seu modulo foi criado com sucesso.');
+   }
+    public function cadastro_aulas(){
+        $cursos = $this->_cursos();
+        return view('cad_aulas', compact('cursos'));
+    }
+    public function salvar_aula(Request $request) {
+        Aula::create($request->all());
+        return redirect('/cadastro/aulas')->with('success', 'Sua aula foi criada com sucesso.');
+    }
+ 
+    public function preencherSub(Request $request){
+        $modulo = Modulo::where('cursos_id', '=', $request->cursos_id)->get();
+        
+    if (count($modulo) > 0) {
+        return response()->json($modulo);
+    }
+    }
+    
 }
+

@@ -2,6 +2,7 @@
 @section('conteudo')
   <body>
     <div class="pageheaderbg">
+      Pagina de contato
     </div>
   </body>
 @endsection('conteudo')

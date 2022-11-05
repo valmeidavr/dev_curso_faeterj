@@ -74,7 +74,6 @@
   
 @endsection
 
-
 @section('javascript')
 <script>
     $('#frm-comentar').submit(function(e){

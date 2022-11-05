@@ -1,6 +1,6 @@
 <main>
     @yield('menu_lateral')
-      <section class="content">
+      <div class="container">
           @yield('conteudo')
-      </section>
+      </div>
 </main>
