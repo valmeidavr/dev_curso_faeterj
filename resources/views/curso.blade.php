@@ -1,7 +1,8 @@
 @extends('layouts.paginas')
 @include('layouts.partials.menu')
-
+@inject('carbon', 'Carbon\Carbon')
 @section('conteudo')
+
 <div class="container-fluid h-100">
     <div class="row h-100">
         <div class="col-lg-3 col-12" style="background-color: rgb(218, 218, 218); padding: 30px;">
@@ -48,11 +49,7 @@
                         <br><br>
                     </div>
   
-                    <div id="montarCard">
-
-                    </div>
-                     
-                    
+                                   
 
                     <form id="frm-comentar" method="POST" action="{{route('comentar')}}" class="mt-4">
                         <div class="form-row">
@@ -61,8 +58,12 @@
                             <textarea class="form-control" name="comentario" id="comentario" rows="5"></textarea>
                           </div>
                         </div>
-                        <button type="submit" class="mt-2 btn btn-primary mb-2">Comentar</button>
+                        <button id="btn_comentar" type="submit" class="mt-2 btn btn-primary mb-2">Comentar</button>
                       </form>
+
+                      <div id="montarCard">
+                        @include('card_comentarios')
+                    </div>    
     
                 </div>
             @else
@@ -75,12 +76,17 @@
 @endsection
 
 @section('javascript')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    $('#frm-comentar').submit(function(e){
+     $('#frm-comentar').submit(function(e){
         e.preventDefault();
+        $('#btn_comentar').prop('disabled', true);
+        $('#btn_comentar').text('Aguarde..');
         let comentario = $('#comentario').val();
         let aula_id = $('#aula_id').val();
-    
+
+        /* console.log(`comentario: ${comentario} - id: ${aula_id}`); */
+        
         fetch(`/comentar`, {
             method: 'POST',
             body: JSON.stringify({
@@ -89,20 +95,22 @@
             }),
             headers: {"Content-type": "application/json; charset=UTF-8"},
         })
-        .then(res => res.json())
+        .then(res => res.text())
         .then(res => {
-            montarCard(res);
-        })
-    });
+            if(res != '"error"') {
+                $('#comentario').val('');
+                document.getElementById('montarCard').innerHTML = res;
+                $('#btn_comentar').prop('disabled', false);
+                $('#btn_comentar').text('Comentar');
+                swal("Sucesso", "Postagem do comentario realizada!", "success");
+            } else {
+                $('#btn_comentar').prop('disabled', false);
+                $('#btn_comentar').text('Comentar');
+                swal("Erro", "Ao realizar a postagem do comentario!", "error");
+            }
+        }) 
 
-
-function montarCard(res) {
-     $('#montarCard').html(`<div class='card'>
-        <h6 class='card-header'>${res.created_at} - teste@teste.com.br</h6>
-        <div class='card-body'>
-            <p class='card-text'>${res.descricao}</p></div>
-        </div>`); 
-}
+     });
 
 </script>
 @endsection

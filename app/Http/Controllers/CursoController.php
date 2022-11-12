@@ -6,6 +6,7 @@ use App\Curso;
 use App\Aula;
 use App\Modulo;
 use App\User;
+use App\Comentarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -14,6 +15,7 @@ class CursoController extends Controller
 {
     public function index() {
         $cursos = Curso::paginate(4);
+       
         return view('cursos', compact('cursos'));
 
     }
@@ -25,6 +27,10 @@ class CursoController extends Controller
     }
 
     public function show_cursos($id) { 
+        if(!Auth::user()) {
+            return redirect('/login');
+        }
+
         $curso = Curso::where('id', '=', $id)->get();
         $modulo = Modulo::where('cursos_id', '=', $id)->first()->id;
         $aula = Aula::where('cursos.id', '=', $id)
@@ -35,7 +41,8 @@ class CursoController extends Controller
                 ->orderBy('id', 'ASC')
                 ->limit(1)
                 ->first(); 
-        return view('curso', compact('curso', 'aula'));
+        $comentarios = Comentarios::where('aulas_id', '=', 1)->get();
+        return view('curso', compact('curso', 'aula', 'comentarios'));
     }
     public function cadastro(){
         $professores = $this->_professores();

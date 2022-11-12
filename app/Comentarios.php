@@ -11,4 +11,8 @@ class Comentarios extends Model
         'descricao',
         'aulas_id'
     ];
+
+    public function aluno_exibir() {
+        return $this->hasOne(User::class, 'id', 'aluno_id');
+    }
 }
