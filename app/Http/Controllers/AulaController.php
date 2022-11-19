@@ -7,6 +7,12 @@ use App\Comentarios;
 
 class AulaController extends Controller
 {
+    public function deletar_comentario(Request $request) {
+        Comentarios::where('id', $request->comentario_id)->delete();
+        return response()->json('NO CONTENT', 204);
+    }
+
+
     public function comentar(Request $request) {
        //Precisamos colocar o metodo Auth::user()->id em alunos_id
        //segunda de utilizar o create

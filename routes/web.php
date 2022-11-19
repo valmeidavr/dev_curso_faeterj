@@ -26,13 +26,14 @@ Route::post('/pesquisar-curso', 'CursoController@pesquisar_curso')->name('pesqui
 
 Route::get('/cursos', 'CursoController@index');
 
-Route::get('/curso/{id}', 'CursoController@show_cursos');
+Route::get('/curso/{curso_id}/aula/{aula_id}', 'CursoController@show_cursos');
 
 //Cadastros
 Route::get('/cadastro/cursos', 'CursoController@cadastro');
 Route::post('/cadastro/cursos/salvar', 'CursoController@salvar_curso')->name('salvar_curso');
 
 Route::post('/comentar', 'AulaController@comentar')->name('comentar');
+Route::post('/comentar/deletar', 'AulaController@deletar_comentario')->name('deletar_comentario');
 
 Route::get('/cadastro/user', 'UserController@cadastro_user');
 Route::post('/cadastro/user/salvar', 'UserController@salvar_user')->name('salvar_user');

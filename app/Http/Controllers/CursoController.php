@@ -10,12 +10,13 @@ use App\Comentarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Exception;
 
 class CursoController extends Controller
 {
     public function index() {
         $cursos = Curso::paginate(4);
-       
         return view('cursos', compact('cursos'));
 
     }
@@ -26,23 +27,26 @@ class CursoController extends Controller
         return view('cursos', compact('cursos'));
     }
 
-    public function show_cursos($id) { 
+    public function show_cursos($curso_id, $aula_id) { 
         if(!Auth::user()) {
             return redirect('/login');
         }
-
-        $curso = Curso::where('id', '=', $id)->get();
-        $modulo = Modulo::where('cursos_id', '=', $id)->first()->id;
-        $aula = Aula::where('cursos.id', '=', $id)
-                ->where('modulos_id', '=', $modulo)
-                ->join('modulos', 'modulos.id', '=', 'aulas.modulos_id')
-                ->join('cursos', 'cursos.id', '=', 'modulos.cursos_id')
-                ->select('aulas.*')
-                ->orderBy('id', 'ASC')
-                ->limit(1)
-                ->first(); 
-        $comentarios = Comentarios::where('aulas_id', '=', 1)->get();
-        return view('curso', compact('curso', 'aula', 'comentarios'));
+         try {         
+            $curso_id = decrypt($curso_id);
+            $aula_id = decrypt($aula_id);
+            $curso = Curso::where('id', '=', $curso_id)->get();
+            $modulo = Modulo::where('cursos_id', '=', $curso_id)->first()->id;
+            $aula = Aula::where('id', '=', $aula_id)
+                    ->select('aulas.*')
+                    ->orderBy('id', 'ASC')
+                    ->limit(1)
+                    ->first(); 
+            $comentarios = Comentarios::where('aulas_id', '=', $aula_id)->get();
+            return view('curso', compact('curso', 'aula', 'comentarios'));
+        } catch(Exception $ex) {
+            abort(404);
+        }
+        
     }
     public function cadastro(){
         $professores = $this->_professores();

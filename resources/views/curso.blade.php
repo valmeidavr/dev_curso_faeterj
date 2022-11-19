@@ -18,7 +18,11 @@
                             <ul class="module_list">
                             <!-- Aulas-->
                                 @foreach($modulos->aulas_exibir as $aulas)
-                                <li><a href="#">{{ $aulas->nome }}</a></li>
+                                <li>
+                                    <a href="/curso/{{ encrypt($cursos_detalhe->id) }}/aula/{{encrypt($aulas->id)}}">
+                                        {{ $aulas->nome }}
+                                    </a>
+                                </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -78,6 +82,20 @@
 @section('javascript')
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+     const excluir = (comentario_id) => {
+       fetch(`/comentar/deletar`, {
+            method: 'POST',
+            body: JSON.stringify({
+                comentario_id
+            }),
+            headers: {"Content-type": "application/json; charset=UTF-8"},
+        })
+        .then(res => {
+            $(`#card-${comentario_id}`).fadeOut(500)
+        }) 
+     }
+
+   
      $('#frm-comentar').submit(function(e){
         e.preventDefault();
         $('#btn_comentar').prop('disabled', true);
